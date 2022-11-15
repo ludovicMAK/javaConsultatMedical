@@ -20,6 +20,7 @@ public class FrmConsulter extends JFrame
     private JTable tblMedicaments;
     private ModelJTable mld;
     private CtrlConsultation ctrlConsult;
+    private CtrlMedicament ctrlMed;
 
     public FrmConsulter()
     {
@@ -47,6 +48,10 @@ public class FrmConsulter extends JFrame
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 // A vous de jouer
+                mld = new ModelJTable();
+                ctrlMed = new CtrlMedicament();
+                mld.loadMedicamentSelonConsultat(ctrlMed.GetAllMedicamentsByIdConsultations(Integer.parseInt(tblConsultations.getValueAt(tblConsultations.getSelectedRow(),0).toString())));
+                tblMedicaments.setModel(mld);
 
             }
         });
