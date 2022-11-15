@@ -42,8 +42,19 @@ public class CtrlConsultation
     }
     public int getLastNumberOfConsultation()
     {
+        int sommeConsulat = 0;
+        try {
+            ps = cnx.prepareStatement("SELECT COUNT(consultation.idConsult) FROM consultation");
 
-        return 0;
+            rs = ps.executeQuery();
+            rs.next();
+            sommeConsulat = rs.getInt(1)+1;
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"On n' a pas pu afficher la somme des consultat");
+        }
+        return sommeConsulat;
+
     }
     public void InsertConsultation(int idConsult, String dateConsultation, int numPatient,int numMedecin)
     {

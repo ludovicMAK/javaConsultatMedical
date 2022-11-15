@@ -28,6 +28,7 @@ public class FrmPrescrire extends JFrame
     private JLabel lblNomPatient;
     private JLabel lblMedicaments;
     private JDateChooser dcDateConsultation;
+    private CtrlConsultation ctrlConsul;
 
     public FrmPrescrire()
     {
@@ -43,8 +44,11 @@ public class FrmPrescrire extends JFrame
                 dcDateConsultation = new JDateChooser();
                 dcDateConsultation.setDateFormatString("yyyy-MM-dd");
                 pnlDate.add(dcDateConsultation);
+                ctrlConsul = new CtrlConsultation();
 
                 // A vous de jouer
+                txtNumeroConsultation.setText(String.valueOf(ctrlConsul.getLastNumberOfConsultation()));
+
 
             }
         });
