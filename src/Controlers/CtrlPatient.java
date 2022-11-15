@@ -41,7 +41,18 @@ public class CtrlPatient
     }
     public int getIdPatientByName(String nomPat)
     {
+       int idPatient = 0;
+        try {
+            ps = cnx.prepareStatement("SELECT patient.idPatient FROM patient WHERE patient.nomPatient = ?");
+            ps.setString(1,nomPat);
+            rs = ps.executeQuery();
+            rs.next();
+            idPatient = rs.getInt(1);
 
-        return 0;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"On n' arrive pas pu récupérer l' id du patients");
+        }
+        return idPatient;
+
     }
 }
