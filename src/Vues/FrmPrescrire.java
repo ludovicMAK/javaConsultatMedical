@@ -30,6 +30,7 @@ public class FrmPrescrire extends JFrame
     private JDateChooser dcDateConsultation;
     private CtrlConsultation ctrlConsul;
     private CtrlMedecin ctrlMed;
+    private CtrlPatient ctrlPat;
 
     public FrmPrescrire()
     {
@@ -50,9 +51,13 @@ public class FrmPrescrire extends JFrame
                 // A vous de jouer
                 ctrlConsul = new CtrlConsultation();
                 ctrlMed = new CtrlMedecin();
+                ctrlPat = new CtrlPatient();
                 txtNumeroConsultation.setText(String.valueOf(ctrlConsul.getLastNumberOfConsultation()));
                 for(String nomMed:ctrlMed.getAllMedecins()){
                     cboMedecins.addItem(nomMed);
+                }
+                for(String nomPat:ctrlPat.getAllPatients()){
+                    cboPatients.addItem(nomPat);
                 }
 
 

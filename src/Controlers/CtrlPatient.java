@@ -3,6 +3,7 @@ package Controlers;
 import Entities.Consultation;
 import Tools.ConnexionBDD;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,8 +24,20 @@ public class CtrlPatient
 
     public ArrayList<String> getAllPatients()
     {
+        ArrayList<String> nomPatient = new ArrayList<>();
+        try {
+            ps = cnx.prepareStatement("SELECT patient.nomPatient FROM patient");
 
-        return null;
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                nomPatient.add(rs.getString(1));
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"On n' arrive pas pu récupérer les nom des patients");
+        }
+        return nomPatient;
+
     }
     public int getIdPatientByName(String nomPat)
     {
