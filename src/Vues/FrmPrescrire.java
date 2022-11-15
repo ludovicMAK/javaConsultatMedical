@@ -76,6 +76,20 @@ public class FrmPrescrire extends JFrame
             public void actionPerformed(ActionEvent e) {
 
                 // A vous de jouer
+                if (dcDateConsultation.getDate() == null){
+                    JOptionPane.showMessageDialog(null,"Veuillez saisir une date SVP");
+                }
+                else {
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    String dateConsultat = sdf.format(dcDateConsultation.getDate());
+                    int i = 0;
+                    while (i<tblMedicaments.getRowCount()){
+                        if (Integer.parseInt(tblMedicaments.getValueAt(i,3).toString())>0){
+                            ctrlConsul.InsertConsultation(ctrlConsul.getLastNumberOfConsultation(),dateConsultat,ctrlPat.getIdPatientByName(cboPatients.getSelectedItem().toString()),ctrlMed.getIdMedecinByName(cboMedecins.getSelectedItem().toString()));
+                        }
+                        i++;
+                    }
+                }
 
 
             }
