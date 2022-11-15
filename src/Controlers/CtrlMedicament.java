@@ -31,7 +31,7 @@ public class CtrlMedicament
             ps.setInt(1,idConsultation);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Medicament unMedicaments = new Medicament(rs.getInt(1),rs.getString(2),rs.getInt(3));
+                Medicament unMedicaments = new Medicament(rs.getInt(1),rs.getString(2),rs.getDouble(3));
                 lesMedicaments.add(unMedicaments);
             }
 
@@ -44,6 +44,19 @@ public class CtrlMedicament
     public ArrayList<Medicament> getAllMedicaments()
     {
 
-        return null;
+        ArrayList<Medicament> lesMedicaments = new ArrayList<>();
+        try {
+            ps = cnx.prepareStatement("SELECT medicament.idMedoc,medicament.nomMedoc,medicament.prixMedoc FROM medicament");
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Medicament unMedicaments = new Medicament(rs.getInt(1),rs.getString(2),rs.getDouble(3),0);
+                lesMedicaments.add(unMedicaments);
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"On n' arrive pas à afficher les médicaments ");
+        }
+        return lesMedicaments;
     }
 }

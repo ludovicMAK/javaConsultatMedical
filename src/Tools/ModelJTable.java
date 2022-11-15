@@ -68,6 +68,19 @@ public class ModelJTable extends AbstractTableModel {
         }
         fireTableChanged(null);
     }
+    public void loadMedicaments(ArrayList<Medicament> lesMedicaments){
+        colonnes = new  String[]{"Numéro","Nom","Prix","quantité"};
+        lignes = new Object[lesMedicaments.size()][4];
+        int i =0;
+        for(Medicament med:lesMedicaments){
+            lignes[i][0] = med.getNumero();
+            lignes[i][1] = med.getNom();
+            lignes[i][2] = med.getPrix();
+            lignes[i][3] = med.getQuantite();
+            i++;
+        }
+        fireTableChanged(null);
+    }
 
 
 }
