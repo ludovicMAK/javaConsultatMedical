@@ -18,6 +18,8 @@ public class FrmConsulter extends JFrame
     private JTable tblConsultations;
     private JLabel lblMedicaments;
     private JTable tblMedicaments;
+    private ModelJTable mld;
+    private CtrlConsultation ctrlConsult;
 
     public FrmConsulter()
     {
@@ -27,12 +29,17 @@ public class FrmConsulter extends JFrame
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
 
+
+
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowOpened(WindowEvent e) {
                 super.windowOpened(e);
                 // A vous de jouer
-
+                mld = new ModelJTable();
+                ctrlConsult = new CtrlConsultation();
+                mld.loadConsultat(ctrlConsult.GetAllConsultations());
+                tblConsultations.setModel(mld);
             }
         });
         tblConsultations.addMouseListener(new MouseAdapter() {

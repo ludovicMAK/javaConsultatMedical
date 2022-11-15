@@ -3,6 +3,7 @@ package Controlers;
 import Entities.Consultation;
 import Tools.ConnexionBDD;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,8 +24,21 @@ public class CtrlConsultation
 
     public ArrayList<Consultation> GetAllConsultations()
     {
+        ArrayList<Consultation> lesConsultats = new ArrayList<>();
+        try {
+            ps = cnx.prepareStatement("SELECT DISTINCT consultation.idConsult,consultation.dateConsult,patient.nomPatient,medecin.nomMedecin FROM medecin,patient,consultation,prescrire,medicament,vignette WHERE medecin.idMedecin = patient.numMedecinReferent AND patient.idPatient = consultation.numPatient ORDER BY consultation.idConsult ASC");
 
-        return null;
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Consultation uneconsultation = new Consultation(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),0.5);
+                lesConsultats.add(uneconsultation);
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"On n' arrive pas à afficher les consultat");
+        }
+        return lesConsultats;
+
     }
     public int getLastNumberOfConsultation()
     {
